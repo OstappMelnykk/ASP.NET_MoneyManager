@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  webmoneymanager:
+    image: ${DOCKER_REGISTRY-}webmoneymanager
+    build:
+      context: .
+      dockerfile: WebMoneyManager/Dockerfile
