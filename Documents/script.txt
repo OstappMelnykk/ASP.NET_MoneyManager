@@ -1,0 +1,50 @@
+CREATE TABLE Users (
+    users_ID serial PRIMARY KEY,
+    users_name varchar(255) NOT NULL,
+    users_phonenumber varchar(40) NOT NULL,
+    password_hash varchar(60) NOT NULL, 
+    password_salt varchar(60) NOT NULL,
+    users_email varchar(255) NOT NULL,
+    users_photo bytea,
+    role_id int REFERENCES Roles (role_id) -- Поле для зв'язку з ролями
+);
+
+-- Створення таблиці Roles
+CREATE TABLE Roles (
+    role_id serial PRIMARY KEY,
+    role_name varchar(255) NOT NULL
+);
+
+-- Створення таблиці Users_Roles для відношення багато-до-багатьох між користувачами та ролями
+CREATE TABLE Users_Roles (
+    user_id int REFERENCES Users (users_ID),
+    role_id int REFERENCES Roles (role_id),
+    PRIMARY KEY (user_id, role_id)
+);
+
+-- Створення таблиці Accounts
+CREATE TABLE Accounts (
+    accounts_ID serial PRIMARY KEY,
+    accounts_title varchar(255) NOT NULL,
+    fk_users_ID int REFERENCES Users (users_ID)
+);
+
+-- Створення таблиці Goals
+CREATE TABLE Goals (
+    goals_ID serial PRIMARY KEY,
+    goals_title varchar(255) NOT NULL,
+    goals_description text,
+    goals_AmountToCollect decimal(18, 2) NOT NULL,
+    fk_accounts_ID int REFERENCES Accounts (accounts_ID)
+);
+
+-- Створення таблиці Transactions
+CREATE TABLE Transactions (
+    transactions_ID serial PRIMARY KEY,
+    transactions_type int CHECK (transactions_type IN (1, 2, 3)),
+    fk_accounts_ID_from int REFERENCES Accounts (accounts_ID),
+    fk_accounts_ID_to int REFERENCES Accounts (accounts_ID),
+    transactions_description text,
+    transactions_sum decimal(18, 2) NOT NULL,
+    transactions_date date DEFAULT current_date
+);
