@@ -1,0 +1,44 @@
+﻿@model RegisterViewModel
+
+<div class="page">
+    <div class="container">
+        <div class="left">
+            <div class="login">Sign Up</div>
+            <div class="eula">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                <a asp-controller="Home" , asp-action="index" class="backLink">Back</a>
+            </div>
+        </div>
+        <div class="right">
+            <div class="form">
+                <form method="post" asp-controller="Account" asp-action="Register">
+                    <div asp-validation-summary="All" class="AspValidationSummary"></div>
+
+
+
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" placeholder=".">
+                    
+                    
+                    <label asp-for="PhoneNumber"></label>
+                    <input asp-for="PhoneNumber" placeholder=".">
+
+
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" placeholder=".">
+
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" placeholder=".">
+
+                    <label asp-for="PasswordConfirm"></label>
+                    <input asp-for="PasswordConfirm" placeholder="." />
+
+                    <div class="sisu">
+                        <input type="submit" id="submit" value="Sign Up">
+                        <a asp-controller="Account" asp-action="Login" id="link-button" class="styled-button">Sign In?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
