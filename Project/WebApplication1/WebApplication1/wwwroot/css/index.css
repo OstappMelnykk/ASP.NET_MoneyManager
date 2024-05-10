@@ -1,0 +1,18 @@
+﻿.btn-custom {
+    padding: 10px 20px; 
+    font-size: 16px;
+    border-radius: 5px;
+    width: 150px; 
+    text-align: center; 
+}
+
+.btn {
+    display: inline-block; 
+    margin: 5px;
+    text-decoration: none; 
+    color: white;
+}
+
+.btn-primary, .btn-secondary, .btn-danger, .btn-success, .btn-info {
+    width: 30%; 
+}

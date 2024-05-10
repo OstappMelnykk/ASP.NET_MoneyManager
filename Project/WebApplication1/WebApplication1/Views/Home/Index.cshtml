@@ -1,26 +1,39 @@
 ﻿
-<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="User" asp-action="UserMainPage">UserMainPage</a></h3>
-<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="Administrator" asp-action="AdministratorMainPage">AdministratorMainPage</a></h3>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p>@User.Identity.Name</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h3 class="text-center mb-3">
+                &nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="User" asp-action="UserMainPage" class="btn btn-primary">User Main Page</a>
+            </h3>
+            <h3 class="text-center mb-3">
+                &nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="Administrator" asp-action="AdministratorMainPage" class="btn btn-secondary">Administrator Main Page</a>
+            </h3>
 
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="log out" />
-    </form>
-}
-else
-{
-    <a asp-controller="Account" asp-action="Login">Log in</a>
-    <a asp-controller="Account" asp-action="Register">Register</a>
-}
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="text-center">
+                    <p>@User.Identity.Name!</p>
+                    <form method="post" asp-controller="Account" asp-action="Logout">
+                        <button type="submit" class="btn btn-danger btn-custom">Log Out</button>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-success btn-custom">Log In</a>
+                    <a asp-controller="Account" asp-action="Register" class="btn btn-info btn-custom">Register</a>
+                </div>
+            }
 
-<p>
-    IsAuthenticated : @User.Identity.IsAuthenticated
-</p>
+            <div class="text-center mt-4">
+                <p>Is Authenticated: @User.Identity.IsAuthenticated</p>
+                <p>Name: @User.Identity.Name</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-    Name : @User.Identity.Name
-</p>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/css/index.css" />
