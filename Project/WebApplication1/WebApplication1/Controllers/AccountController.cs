@@ -45,15 +45,30 @@ namespace WebApplication1.Controllers
                     return View(model);
                 }
 
-
-                Person user = new Person {
-                    PersonId = await db.Users.CountAsync() + 1,
+                Person user = new Person
+                {
+                    //PersonId = await db.Users.CountAsync(),
                     Email = model.Email,
                     UserName = model.UserName,
                     PhoneNumber = model.PhoneNumber,
-                    Photo = null
+                    Photo = null,
+                    Accounts = new List<Account>()
                 };
 
+                // Create account
+                Account account = new Account()
+                {
+                    Title = "Default",
+                    Person = user,
+                    Goals = new List<Goal>(),
+                    TransactionsFrom = new List<Transaction>(),
+                    TransactionsTo = new List<Transaction>(),
+                };
+
+                // Add account to user
+                user.Accounts.Add(account);
+
+                // Save user and account to database
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -68,6 +83,8 @@ namespace WebApplication1.Controllers
                     }
 
                     await _signInManager.SignInAsync(user, false);
+                    // Save changes to database
+                    await db.SaveChangesAsync();
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -76,11 +93,11 @@ namespace WebApplication1.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-
                 }
             }
             return View(model);
         }
+
 
 
 

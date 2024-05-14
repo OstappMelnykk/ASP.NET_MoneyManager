@@ -24,14 +24,42 @@ namespace WebApplication1.Controllers
             var user = await _userManager.GetUserAsync(User);
             var email = user.Email;
             var userId = user.Id;
-            var userIdentiif = user.PersonId;
+
 
             ViewBag.Email = email;
             ViewBag.UserId = userId;
-            ViewBag.userIdentiif = userIdentiif;
+           
 
             ViewBag.Name = User.Identity.Name;
             ViewBag.IsAuthenticated = User.Identity.IsAuthenticated;
+
+
+            /*bool HasAccount = user.CurrentAccountId != null;
+
+            ViewBag.HasAccount = HasAccount;
+
+
+            if (HasAccount)
+            {
+
+                ViewBag.AccountName = db
+                    .Accounts
+                    .Where(account => account.AccountId == user.CurrentAccountId).FirstOrDefault().Title;
+
+
+                ViewBag.AccountBalance = db.Accounts
+                    .Where(account => account.AccountId == user.CurrentAccountId)
+                    .Select(account => (
+                                (account.TransactionsFrom.Select(transaction => transaction.Sum).Sum()) -
+                                (account.TransactionsTo.Select(transaction => transaction.Sum).Sum())
+                            ));
+
+            }
+*/
+
+
+
+
             return View();
         }
     }
