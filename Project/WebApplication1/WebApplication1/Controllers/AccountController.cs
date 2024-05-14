@@ -37,7 +37,15 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
-            { 
+            {
+                var existingUser = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError(string.Empty, "This email is already in use.");
+                    return View(model);
+                }
+
+
                 Person user = new Person {
                     PersonId = await db.Users.CountAsync() + 1,
                     Email = model.Email,
@@ -86,20 +94,25 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                        return Redirect(model.ReturnUrl);
-                    else
-                        return RedirectToAction("Index", "Home");
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, false);
+                    if (result.Succeeded)
+                    {
+                        if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                            return Redirect(model.ReturnUrl);
+                        else
+                            return RedirectToAction("Index", "Home");
+                    }
                 }
-                else
-                    ModelState.AddModelError("", "Incorrect login and (or) password");
+
+                ModelState.AddModelError("", "Incorrect login and (or) password");
             }
 
             return View(model);
         }
+
 
 
 
