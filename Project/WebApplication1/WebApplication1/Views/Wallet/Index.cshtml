@@ -37,4 +37,15 @@ else
     <br></br>
     Name: @User.Identity.Name
 </div>
-        </div>
+
+@{
+
+}
+
+@foreach (var item in ViewBag.Accounts)
+{
+    <h3>@item.Title | balance  | <button>Choose</button> <button>delete</button></h3>
+}
+<br></br>
+
+<a asp-action="index" asp-controller="Wallet"><h1>CREATE NEW ACCOUNT</h1></a>

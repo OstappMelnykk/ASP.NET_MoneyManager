@@ -1,39 +1,102 @@
-﻿
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h3 class="text-center mb-3">
-                &nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="User" asp-action="UserMainPage" class="btn btn-primary">User Main Page</a>
-            </h3>
-            <h3 class="text-center mb-3">
-                &nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="Administrator" asp-action="AdministratorMainPage" class="btn btn-secondary">Administrator Main Page</a>
-            </h3>
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="text-center">
-                    <p>@User.Identity.Name!</p>
-                    <form method="post" asp-controller="Account" asp-action="Logout">
-                        <button type="submit" class="btn btn-danger btn-custom">Log Out</button>
-                    </form>
-                </div>
-            }
-            else
-            {
-                <div class="text-center">
-                    <a asp-controller="Account" asp-action="Login" class="btn btn-success btn-custom">Log In</a>
-                    <a asp-controller="Account" asp-action="Register" class="btn btn-info btn-custom">Register</a>
-                </div>
-            }
-
-            <div class="text-center mt-4">
-                <p>Is Authenticated: @User.Identity.IsAuthenticated</p>
-                <p>Name: @User.Identity.Name</p>
-            </div>
-        </div>
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h1>NAME:     @User.Identity.Name!!!!!!!!!!!!!</h1>
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <section>
+                <nav>
+                    <ul class="menuItems">
+                        <li>
+                            <button type="submit">Log Out</button>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+        </form>
     </div>
-</div>
+}
+else
+{
+    <div class="text-center">
+        <section>
+            <nav>
+                <ul class="menuItems">
+                    <li><a asp-controller="Account" asp-action="Login" class="btn btn-success btn-custom">Log In</a></li>
+                    <li><a asp-controller="Account" asp-action="Register" class="btn btn-info btn-custom">Register</a></li>
+                </ul>
+            </nav>
+        </section>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="~/css/index.css" />
+    </div>
+}
+
+
+
+<div>
+    Is Authenticated: @User.Identity.IsAuthenticated
+    <br></br>
+    Name: @User.Identity.Name
+</div>
+<br></br>
+
+<div class="data1">
+
+
+
+
+    <p>UserMainPage</p>
+    <p> Email : @ViewBag.Email </p>
+    <p> UserId : @ViewBag.UserId </p>
+    <p> Name : @ViewBag.Name </p>
+
+    <br />
+    <p> AccountName : @ViewBag.AccountName </p>
+    <p> Balance : @ViewBag.AccountBalance </p>
+</div>
+<br />
+<table>
+
+    <tr>
+        <th>Description</th>
+        <th>Sum</th>
+        <th>Date</th>
+    </tr>
+    @if (ViewBag.LastTransactions != null)
+    {
+        @foreach (var item in ViewBag.LastTransactions)
+        {
+            <tr>
+                <th>@item.Description</th>
+                <th>@item.Sum</th>
+                <th>@item.Date</th>
+            </tr>
+        }
+    }
+
+
+
+</table>
+<br></br>
+<a asp-action="index" asp-controller="Transaction">SEE MORE</a>
+
+
+<br></br>
+<br></br>
+<a asp-action="index" asp-controller="Transaction">Add transaction</a>
+
+
+
+
+
+
+<style>
+    table, th, td {
+        margin 5px;
+        border: 1px solid;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+</style>

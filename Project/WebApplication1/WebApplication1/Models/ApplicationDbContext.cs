@@ -21,6 +21,23 @@ namespace WebApplication1.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Person>()
+               .HasOne(p => p.CurrentAccount)
+               .WithMany()
+               .HasForeignKey(p => p.CurrentAccountId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Account>()
+                .HasOne(a => a.Person)
+                .WithMany(p => p.Accounts)
+                .HasForeignKey(a => a.PersonId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+
+
+            /////////
+
+            modelBuilder.Entity<Person>()
                 .HasMany(p => p.Accounts)
                 .WithOne(a => a.Person)
                 .HasForeignKey(a => a.PersonId);
@@ -32,13 +49,13 @@ namespace WebApplication1.Models
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Account>()
-                .HasMany(a => a.TransactionsFrom)
+                .HasMany(a => a.TransactionsOnTheAccount)
                 .WithOne(t => t.AccountFrom)
                 .HasForeignKey(t => t.AccountFromId)
                 .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<Account>()
-                .HasMany(a => a.TransactionsTo)
+                .HasMany(a => a.TransactionsFromTheAccount)
                 .WithOne(t => t.AccountTo)
                 .HasForeignKey(t => t.AccountToId)
                 .OnDelete(DeleteBehavior.Restrict);

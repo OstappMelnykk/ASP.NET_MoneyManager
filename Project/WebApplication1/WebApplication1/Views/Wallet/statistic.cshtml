@@ -1,0 +1,47 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+<canvas id="myChart" style="width:100%;max-width:700px"> </canvas>
+
+
+<<script>
+     var xyValues = [
+         { x: new Date('2024-05-01'), y: 7 },
+         { x: new Date('2024-05-02'), y: 8 },
+         { x: new Date('2024-05-03'), y: 8 },
+         { x: new Date('2024-05-04'), y: 9 },
+         { x: new Date('2024-05-05'), y: 9 },
+         { x: new Date('2024-05-06'), y: 9 },
+         { x: new Date('2024-05-07'), y: 10 },
+         { x: new Date('2024-05-08'), y: 11 },
+         { x: new Date('2024-05-09'), y: 14 },
+         { x: new Date('2024-05-10'), y: 14 },
+         { x: new Date('2024-05-11'), y: 15 }
+     ];
+
+     new Chart("myChart", {
+         type: "scatter",
+         data: {
+             datasets: [{
+                 pointRadius: 4,
+                 pointBackgroundColor: "rgb(0,0,255)",
+                 data: xyValues
+             }]
+         },
+         options: {
+             legend: { display: false },
+             scales: {
+                 xAxes: [{
+                     type: 'time',
+                     time: {
+                         unit: 'day' // змініть на 'month', 'year' або інше за необхідності
+                     }
+                 }],
+
+                 yAxes: [{ ticks: { min: 6, max: 16 } }],
+             }
+         }
+     });
+</script>

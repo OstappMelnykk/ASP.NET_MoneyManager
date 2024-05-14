@@ -10,7 +10,14 @@ namespace WebApplication1.Models
 
         public byte[]? Photo { get; set; }
 
-        
+
+
+        public int? CurrentAccountId { get; set; } 
+
+        public Account CurrentAccount { get; set; } 
+
+
+
 
         public ICollection<Account> Accounts { get; set; }
     }

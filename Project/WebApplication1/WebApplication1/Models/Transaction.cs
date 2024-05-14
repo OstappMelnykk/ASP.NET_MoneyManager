@@ -19,10 +19,10 @@ namespace WebApplication1.Models
         public decimal Sum { get; set; }
         public DateTime Date { get; set; }
 
-        public int AccountFromId { get; set; }
-        public Account AccountFrom { get; set; }
+        public int? AccountFromId { get; set; }
+        public Account? AccountFrom { get; set; }
 
-        public int AccountToId { get; set; }
-        public Account AccountTo { get; set; }
+        public int? AccountToId { get; set; }
+        public Account? AccountTo { get; set; }
     }
 }

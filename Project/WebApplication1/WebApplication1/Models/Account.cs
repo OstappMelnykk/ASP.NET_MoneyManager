@@ -24,14 +24,10 @@ namespace WebApplication1.Models
 
 
 
-       
-
-
-
-
+      
         public ICollection<Goal>? Goals { get; set; }
-        public ICollection<Transaction>? TransactionsFrom { get; set; }
-        public ICollection<Transaction>? TransactionsTo { get; set; }
+        public ICollection<Transaction>? TransactionsOnTheAccount { get; set; }
+        public ICollection<Transaction>? TransactionsFromTheAccount { get; set; }
     }
 }
 
