@@ -1,4 +1,73 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿
+<div class="container content-wrapper">
+    <h2 class="mb-4">Goals</h2>
+    <div class="table-responsive">
+        <table class="table fixed-width">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Goal1</td>
+                    <td>77%</td>
+                    <td>
+                        <button class="btn btn-primary btn-space">See more</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Goal2</td>
+                    <td>50%</td>
+                    <td>
+                        <button class="btn btn-primary btn-space">See more</button>
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+
+                <!-- More rows... -->
+            </tbody>
+        </table>
+    </div>
+@*     <div class="text-center">
+        <button class="btn btn-primary btn-create" onclick="showCreateGoalForm()">Create new Goal</button>
+    </div> *@
+
+    <div class="create-goal-form">
+        <h2>Create new goal</h2>
+        <div class="form-group">
+            <label for="goalName">Goal Name:</label>
+            <input type="text" class="form-control" id="goalName" placeholder="Enter goal name">
+        </div>
+        <div class="form-group">
+            <label for="goalAmount">Goal Amount:</label>
+            <input type="number" class="form-control" id="goalAmount" placeholder="Enter goal amount">
+        </div>
+        <div class="form-group">
+            <label for="goalDescription">Goal Description:</label>
+            <input type="text" class="form-control" id="goalDescription" placeholder="Enter goal description">
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary btn-create">Create new Goal</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+@* @if (User.Identity.IsAuthenticated)
 {
     <div>
         <h1>NAME:     @User.Identity.Name!!!!!!!!!!!!!</h1>
@@ -36,4 +105,4 @@ else
     Is Authenticated: @User.Identity.IsAuthenticated
     <br></br>
     Name: @User.Identity.Name
-</div>
+</div> *@

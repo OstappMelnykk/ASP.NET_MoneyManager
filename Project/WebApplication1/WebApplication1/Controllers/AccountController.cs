@@ -81,7 +81,7 @@ namespace WebApplication1.Controllers
 
                 Transaction transaction1 = new Transaction()
                 {
-                    Type = 2,
+                    Type = 3,
                     Description = "Description transaction1",
                     Sum = 100m,
                     Date = new DateTime(2024, 5, 3).ToUniversalTime(),
