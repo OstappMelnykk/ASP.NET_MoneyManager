@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goal Details - Moneymanager</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+      padding-top: 60px; /* Space for fixed navbar */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .content-wrapper {
+      padding: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .btn-primary:hover{
+      border: 1px solid;
+      color: #007bff;
+      background-color: white;
+    }
+</style>
+</head>
+  
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+          <div class="container">
+            <a class="navbar-brand" href="#">Moneymanager</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="accounts.html">Accounts</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="goals.html">Goals</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Statistic</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="my_profile.html">My profile</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </nav>
+  
+    <div class="container content-wrapper">
+      <h2 id="goalTitle" class="mb-4">Goal Name</h2>
+      <form>
+        <div class="form-group">
+          <label for="goalDescription">Description:</label>
+          <input type="text" class="form-control" id="goalDescription" placeholder="Enter description">
+        </div>
+        <div class="form-group">
+          <label for="goalAmount">Amount:</label>
+          <input type="number" class="form-control" id="goalAmount" placeholder="Enter amount">
+        </div>
+        <div class="form-group">
+          <label for="goalName">Goal Name:</label>
+          <input type="text" class="form-control" id="goalName" placeholder="Enter goal name">
+        </div>
+        <div class="form-group">
+          <label for="goalAccount">Account:</label>
+          <input type="text" class="form-control" id="goalAccount" placeholder="Enter account">
+        </div>
+        <div class="text-center">
+          <button class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // You can set the goal name dynamically here if needed
+      document.getElementById('goalTitle').innerText = 'Example Goal Name';
+    </script>
+</body>
+</html>

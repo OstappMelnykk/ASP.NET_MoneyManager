@@ -8,6 +8,7 @@
 <style>
     body {
         background-color: #f7f7f7;
+        padding-top: 60px;
     }
     .account-info, .account-settings, .transaction-table, .actions {
         padding: 15px;
@@ -47,9 +48,58 @@
     .fixed-width th:last-child{
         width: 18%;
     }
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    a{
+      text-decoration: none;
+    }
+    a:hover{
+      text-decoration: none;
+    }
+    .afirst:hover a{
+      color: white;
+    }
+    .asecond:hover a{
+      color: #007bff;
+    }
+    .asecond a{
+      color: white;
+    }
+    .afirst a{
+      color: #007bff;
+    }
 </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Moneymanager</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="accounts.html">Accounts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="goals.html">Goals</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Statistic</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My profile</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
 <div class="container mt-4">
   <div class="account-info">
     <div>
@@ -59,6 +109,9 @@
     <div class="account-settings">
       <button class="btn btn-outline-secondary">Account settings</button>
     </div>
+  </div>
+  <div>
+    <p><strong>Last transactions</strong></p>
   </div>
   <div class="transaction-table">
     <table class="table fixed-width">
@@ -75,13 +128,22 @@
           <td>40</td>
           <td>01.01.2021</td>
         </tr>
+        <tr>
+          <td>Giacomo Guilizzoni<br>Founder & CEO</td>
+          <td>40</td>
+          <td>01.01.2021</td>
+        </tr>
         <!-- More rows here -->
       </tbody>
     </table>
   </div>
   <div class="actions">
-    <button class="btn btn-outline-primary">See more</button>
-    <button class="btn btn-primary">Add transaction</button>
+    <button class="btn btn-outline-primary afirst">
+      <a  href="transactions.html">See more</a>
+    </button>
+    <button class="btn btn-primary asecond">
+      <a  href="add_transactions.html">Add transaction</a>
+    </button>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

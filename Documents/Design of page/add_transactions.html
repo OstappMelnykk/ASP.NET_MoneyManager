@@ -6,7 +6,9 @@
     <title>Transaction Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        
+        body{
+            padding-top: 60px;
+        }
         #transactionForm {
             display: none;
         }
@@ -15,9 +17,40 @@
             color: #007bff;
             background-color: white;
         }
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Moneymanager</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="accounts.html">Accounts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="goals.html">Goals</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Statistic</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">My profile</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
 <div class="container centered-container">
     <div class="card">
         <div class="card-body">
