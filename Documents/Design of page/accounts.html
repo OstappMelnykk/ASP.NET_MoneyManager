@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounts - Moneymanager</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+      padding-top: 56px; /* Space for fixed navbar */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .content-wrapper {
+      padding: 20px;
+    }
+    .table-responsive {
+      margin-top: 20px;
+    }
+    .button-row {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .fixed-width {
+      table-layout: fixed;
+      width: 100%;
+    }
+    .fixed-width th, .fixed-width td {
+      width: 40%;
+      word-wrap: break-word;
+    }
+    .fixed-width th:last-child{
+      width: 20%;
+    }
+    .btn{
+        width: 80px;
+    }
+    .btn-create{
+        width: 170px;
+    }
+    .btn-primary:hover{
+      border: 1px solid;
+      color: #007bff;
+      background-color: white;
+      
+    }
+    .btn-danger:hover{
+        color: #dc3545;
+        background-color: white;
+        border: #dc3545 1px solid;
+    }
+    .text-center{
+        margin-top: 30px;
+    }
+  </style>
+  </head>
+  
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+          <div class="container">
+            <a class="navbar-brand" href="#">Moneymanager</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="generalhome.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="accounts.html">Accounts</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="goals.html">Goals</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Statistic</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="my_profile.html">My profile</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+    </nav>
+  
+    <div class="container content-wrapper">
+      <h2 class="mb-4">Accounts</h2>
+      <div class="table-responsive">
+        <table class="table fixed-width">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Account1</td>
+                <td>Account1</td>
+                <td>
+                    <button class="btn btn-primary btn-space">Choose</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Account1Account1Account1Account1Account1Account1Account1Account1Account1Account1Account1Account1</td>
+                <td>Account1Account1Account1</td>
+                <td>
+                    <button class="btn btn-primary btn-space">Choose</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>              
+              </tr>
+              
+              <!-- More rows... -->
+            </tbody>
+        </table>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary btn-create">Create new Account</button>
+      </div>
+        
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
