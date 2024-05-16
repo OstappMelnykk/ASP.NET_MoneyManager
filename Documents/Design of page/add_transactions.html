@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        
+        #transactionForm {
+            display: none;
+        }
+        .btn-primary:hover{
+            border: 1px solid;
+            color: #007bff;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container centered-container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title text-center">Add Transaction</h2>
+            <div class="text-center">
+                <button class="btn btn-outline-primary btn-block" onclick="showForm('to')">Transfer to account</button>
+                <button class="btn btn-outline-primary btn-block mt-2" onclick="showForm('from')">Transfer from account</button>
+                <button class="btn btn-outline-primary btn-block mt-2" onclick="showForm('between')">Transfer between accounts</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="transactionForm" class="card mt-4">
+        <div class="card-body">
+            
+            <h2 id="formTitle" class="card-title text-center"></h2>
+            <div class="form-group" id="fromGroup">
+                <label for="accountFrom">From:</label>
+                <input type="text" class="form-control" id="accountFrom" placeholder="Enter account from">
+            </div>
+            <div class="form-group" id="toGroup">
+                <label for="accountTo">To:</label>
+                <input type="text" class="form-control" id="accountTo" placeholder="Enter account to">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" class="form-control" id="description" placeholder="Enter description">
+            </div>
+            <div class="form-group">
+                <label for="amount">Sum:</label>
+                <input type="text" class="form-control" id="amount" placeholder="Enter amount">
+            </div>
+            <button class="btn btn-primary btn-block">Add Transaction</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showForm(type) {
+        document.getElementById('transactionForm').style.display = 'block';
+
+        // Set the form title and visibility of form groups based on the button clicked
+        if (type === 'to') {
+            document.getElementById('formTitle').innerText = 'Transfer to account';
+            document.getElementById('fromGroup').style.display = 'none';
+            document.getElementById('toGroup').style.display = 'block';
+        } else if (type === 'from') {
+            document.getElementById('formTitle').innerText = 'Transfer from account';
+            document.getElementById('fromGroup').style.display = 'block';
+            document.getElementById('toGroup').style.display = 'none';
+        } else if (type === 'between') {
+            document.getElementById('formTitle').innerText = 'Transfer between accounts';
+            document.getElementById('fromGroup').style.display = 'block';
+            document.getElementById('toGroup').style.display = 'block';
+        }
+    }
+
+    
+</script>
+</body>
+</html>
