@@ -1,4 +1,11 @@
-﻿<div class="container content-wrapper">
+﻿@using WebApplication1.services
+@model Account
+
+
+
+
+
+<div class="container content-wrapper">
     <h2 class="mb-4">Accounts</h2>
     <div class="table-responsive">
         <table class="table fixed-width">
@@ -14,10 +21,24 @@
                 {                 
                     <tr>
                         <td>@item.Title</td>
-                        <td>balance</td>
+                        <td>@BalanceCounter.ClacBalance(item.AccountId, ViewBag.DbContext)</td>
                         <td>
-                            <a class="btn btn-primary btn-space">Choose</a>
-                            <a class="btn btn-danger">Delete</a>
+                            @{
+                                int account_id = (int)item.AccountId;
+                                Console.WriteLine(account_id);
+                            }
+                            <a asp-action="ChooseWallet" asp-controller="Wallet" asp-route-AccountTitle="@item.Title" class="btn btn-primary btn-space">Choose</a>
+                            <a asp-action="DeleteWallet" asp-controller="Wallet" asp-route-AccountTitle="@item.Title" class="btn btn-primary btn-space btn-danger">Delete</a>
+
+
+                            @* <form asp-action="ChooseWallet" asp-controller="Wallet" asp-antiforgery="true" class="form-group">
+                                <div>
+
+                                        <input type="submit" class="btn btn-primary btn-create" value="Save" />
+                                </div>
+                            </form> *@
+                            
+                            @* <a class="btn btn-danger">Delete</a> *@
                         </td>
                     </tr>
                 }
@@ -29,12 +50,20 @@
 
     <div class="create-account-form">
         <h2>Create new account</h2>
-        <div class="form-group">
-            <label for="accountName">Account Name:</label>
-            <input type="text" class="form-control" id="accountName" placeholder="Enter account name">
-        </div>
         <div class="text-center">
-            <a  class="btn btn-primary btn-create">Create new Account</a>
+            <form asp-action="AddWallet" asp-controller="Wallet" asp-antiforgery="true" class="form-group">
+                <div>
+                    <p>
+                        <label asp-for="Title">Account Name:</label>
+                        <input type="text" asp-for="Title" class="form-control" id="accountName" placeholder="Enter account name" />
+                    </p>
+                    
+                    <p>
+                        <input type="submit" class="btn btn-primary btn-create" value="Save" />
+                    </p>
+                </div>
+            </form>
+
         </div>
     </div>
 

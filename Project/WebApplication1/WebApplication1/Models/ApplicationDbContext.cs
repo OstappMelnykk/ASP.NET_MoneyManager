@@ -33,20 +33,20 @@ namespace WebApplication1.Models
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-
-
-            /////////
-
             modelBuilder.Entity<Person>()
                 .HasMany(p => p.Accounts)
                 .WithOne(a => a.Person)
                 .HasForeignKey(a => a.PersonId);
+
+
 
             modelBuilder.Entity<Account>()
                 .HasMany(a => a.Goals)
                 .WithOne(g => g.Account)
                 .HasForeignKey(g => g.AccountId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
 
             modelBuilder.Entity<Account>()
                 .HasMany(a => a.TransactionsOnTheAccount)

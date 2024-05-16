@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
@@ -5,6 +6,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         ApplicationDbContext db;
@@ -14,74 +16,61 @@ namespace WebApplication1.Controllers
             db = context;
             _userManager = userManager;
         }
+
+
+
+        [Authorize(Policy = "User")]
         public async Task<IActionResult> Index()
         {
-
-            ViewBag.Name = User.Identity.Name;
-            ViewBag.IsAuthenticated = User.Identity.IsAuthenticated;
-
-            if (!User.Identity.IsAuthenticated)
-            {
-                return View();
-            }
             var user = await _userManager.GetUserAsync(User);
 
-            if (user == null)
-            {
-                return View();
-
-            }
-            var email = user.Email;
-            var userId = user.Id;
-
-
-            ViewBag.Email = email;
-            ViewBag.UserId = userId;
-
-
-            
-
-
-            bool HasAccount = user.CurrentAccountId != null;
-
-            ViewBag.HasAccount = HasAccount;
-
-
-
-
-            ViewBag.LastTransactions = new List<int>();
-            ViewBag.AccountName = "Sdfsdsd";
+            bool HasAccount = user.CurrentAccountId != null && db.Accounts.Where(account => account.AccountId == user.CurrentAccountId).Count() != 0;
+            decimal Balance = 0m;
 
             if (HasAccount)
             {
+                string accountName = db.Accounts
+                    .Where(account => account.AccountId == user.CurrentAccountId)
+                    .Select(account => account.Title)
+                    .FirstOrDefault();
 
-                ViewBag.AccountName = db
-                    .Accounts
-                    .Where(account => account.AccountId == user.CurrentAccountId).FirstOrDefault().Title;
+                List<Transaction> AllTransactions = db.Transactions
+                    .Where(
+                        transaction => (
+                            transaction.AccountFromId == user.CurrentAccountId ||
+                            transaction.AccountToId == user.CurrentAccountId))
+                    .OrderByDescending(t => t.Date)
+                    .ToList();
 
-                DateTime dateMin = new DateTime(2023, 5, 14).ToUniversalTime();
-                DateTime dateMax = new DateTime(2025, 5, 10).ToUniversalTime();
+                List<Transaction> LastTransactions = AllTransactions.Take(3).ToList();
 
+                foreach (var transaction in AllTransactions)
+                {
+                    if (transaction.AccountToId == user.CurrentAccountId)
+                    {
+                        Balance += transaction.Sum;
+                    }
+                    else if (transaction.AccountFromId == user.CurrentAccountId)
+                    {
+                        Balance -= transaction.Sum;
+                    }
+                }
 
-
-                List<Transaction> lastTransactionsFrom = db.Transactions.Where(transaction => (transaction.AccountFromId == user.CurrentAccountId
-                || transaction.AccountToId == user.CurrentAccountId) && transaction.Date <= dateMax &&
-                transaction.Date >= dateMin).OrderByDescending(t => t.Date).ToList();
-
-
-
-                ViewBag.LastTransactions = lastTransactionsFrom;
-
-
+                ViewBag.Accounts = db.Accounts.ToList();
+                ViewBag.AccountBalance = Balance;
+                ViewBag.AccountName = accountName;
+                ViewBag.LastTransactions = LastTransactions;
+                ViewBag.HasAccount = HasAccount;
             }
-
-
-
-
+            else
+            {
+                ViewBag.HasAccount = HasAccount;
+            }
 
             return View();
         }
 
-        public IActionResult AccessDenied() => View();
+        
+
     }
 }

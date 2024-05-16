@@ -65,75 +65,13 @@ namespace WebApplication1.Controllers
                     TransactionsFromTheAccount = new List<Transaction>(),
                 };
 
-                Account account2 = new Account()
-                {
-                    Title = "account2",
-                    Person = user,
-                    Goals = new List<Goal>(),
-                    TransactionsOnTheAccount = new List<Transaction>(),
-                    TransactionsFromTheAccount = new List<Transaction>(),
-                };
 
 
-                user.Accounts.Add(account1);
-                user.Accounts.Add(account2);
-
-
-                Transaction transaction1 = new Transaction()
-                {
-                    Type = 3,
-                    Description = "Description transaction1",
-                    Sum = 100m,
-                    Date = new DateTime(2024, 5, 3).ToUniversalTime(),
-                    AccountFrom = account2,
-                    AccountTo = account1,
-                };
-
-                account1.TransactionsOnTheAccount.Add(transaction1);
-                //db.Transactions.Add(transaction1);
-
-                //account2.TransactionsFromTheAccount.Add(transaction1);
+                db.Accounts.Add(account1);
 
 
 
-                /*
-                Transaction transaction2 = new Transaction()
-                {
-                    Type = 1,
-                    Description = "desk,",
-                    Sum = 50m,
-                    Date = new DateTime(2024, 5, 14).ToUniversalTime(), 
-                    AccountFrom = account1,
-                    AccountTo = account2,
-                };
-
-                account1.TransactionsFromTheAccount.Add(transaction2);
-                account2.TransactionsOnTheAccount.Add(transaction2);
-
-
-                Transaction transaction3 = new Transaction()
-                {
-                    Type = 3,
-                    Description = "desk,",
-                    Sum = 20m,
-                    Date = new DateTime(2024, 5, 14).ToUniversalTime(),
-                    AccountFrom = account1,
-                    AccountTo = null,
-                };
-
-                account1.TransactionsFromTheAccount.Add(transaction3);
-
-                Transaction transaction4 = new Transaction()
-                {
-                    Type = 3,
-                    Description = "desk,",
-                    Sum = 30m,
-                    Date = new DateTime(2024, 5, 14).ToUniversalTime(),
-                    AccountFrom = null,
-                    AccountTo = account2,
-                };
-
-                account2.TransactionsOnTheAccount.Add(transaction4);*/
+             
 
 
                 var result = await _userManager.CreateAsync(user, model.Password);

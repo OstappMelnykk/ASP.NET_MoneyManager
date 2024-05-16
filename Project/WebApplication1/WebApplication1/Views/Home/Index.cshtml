@@ -1,51 +1,80 @@
-﻿<div class="container mt-4">
-    <div class="account-info">
+﻿@if (ViewBag.HasAccount)
+{
+    <div class="container mt-4">
+        <div class="account-info">
+            <div>
+                @*             <p><h4>Account name:</h4><strong> <h3>@ViewBag.AccountName</h3> </strong> </p>
+            <p><h4>Balance:</h4><strong> <h3>@ViewBag.AccountBalance $</h3> </strong> </p>
+            *@
+                <p><strong>Account name: </strong>@ViewBag.AccountName</p>
+                <p><strong>Balance: </strong>@ViewBag.AccountBalance $</p>
+            </div>
+            <div class="account-settings">
+                <button class="btn btn-outline-secondary">Account settings</button>
+            </div>
+        </div>
         <div>
-            <p><strong>Account name:</strong> Wallet</p>
-            <p><strong>Balance:</strong> balance</p>
+            <p><strong>Last transactions</strong></p>
         </div>
-        <div class="account-settings">
-            <button class="btn btn-outline-secondary">Account settings</button>
-        </div>
-    </div>
-    <div>
-        <p><strong>Last transactions</strong></p>
-    </div>
-    <div class="transaction-table">
-        <table class="table fixed-width">
-            <thead>
-                <tr>
-                    <td>Description</td>
-                    <td>Sum</td>
-                    <td>Date</td>
-                </tr>
-            </thead>
-            <tbody>
-                @if (ViewBag.LastTransactions != null)
-                {
-                    @foreach (var item in ViewBag.LastTransactions)
+        <div class="transaction-table">
+            <table class="table fixed-width">
+                <thead>
+                    <tr>
+                        <td>From</td>
+                        <td>To</td>
+                        <td>Sum</td>
+                        <td>Description</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.LastTransactions != null)
                     {
-                        <tr>
-                            <td>@item.Description</td>
-                            <td>@item.Sum</td>
-                            <td>@item.Date</td>
-                        </tr>
+                        @foreach (var item in ViewBag.LastTransactions)
+                        {
+                            string TitleFrom = "null";
+                            string TitleTo = "null";
+
+
+
+                            foreach (var account in @ViewBag.Accounts)
+                            {
+                                if (account.AccountId == item.AccountFromId)
+                                    TitleFrom = account.Title;
+                                if (account.AccountId == item.AccountToId)
+                                    TitleTo = account.Title;
+                            }
+
+
+
+
+
+                            <tr>
+                                <td>@TitleFrom</td>
+                                <td>@TitleTo</td>
+                                <td>@item.Sum</td>
+                                <td>@item.Description</td>
+                                <td>@item.Date</td>
+                            </tr>
+                        }
                     }
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="actions">
-        @* <div class="btn btn-outline-primary afirst">
-            <a asp-action="index" asp-controller="Transaction">See more</a>
+                </tbody>
+            </table>
+        </div>
+        <div class="actions">
+            @* <div class="btn btn-outline-primary afirst">
+        <a asp-action="index" asp-controller="Transaction">See more</a>
         </div> *@
-        @* <div class="btn btn-primary asecond">
-            <a asp-action="index" asp-controller="Transaction">Add transaction</a>
+            @* <div class="btn btn-primary asecond">
+        <a asp-action="index" asp-controller="Transaction">Add transaction</a>
         </div> *@
-        <a asp-action="index" asp-controller="Transaction" class="btn btn-outline-primary afirst aclas" >See more</a>
-        <a asp-action="index" asp-controller="Transaction" class="btn btn-primary asecond aclas">Add transaction</a>
+            <a asp-action="index" asp-controller="Transaction" class="btn btn-outline-primary afirst aclas">See more</a>
+            <a asp-action="AddTransaction" asp-controller="Transaction" class="btn btn-primary asecond aclas">Add transaction</a>
+        </div>
     </div>
-</div>
+}
+
+
 
 
 <style>

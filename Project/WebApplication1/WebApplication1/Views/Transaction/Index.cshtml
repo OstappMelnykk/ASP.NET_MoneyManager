@@ -1,4 +1,142 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿<div class="container content-wrapper">
+    <h2 class="mb-4">Transactions</h2>
+    <button class="btn btn-outline-primary mb-3">Apply filters</button>
+    <div class="table-responsive">
+        <table class="table fixed-width">
+            <thead>
+                <tr>
+                    <td>From</td>
+                    <td>To</td>
+                    <td>Sum</td>
+                    <td>Description</td>
+                    <td>Date</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (ViewBag.AllTransactions != null)
+                {
+                    @foreach (var item in ViewBag.AllTransactions)
+                    {
+                        string TitleFrom = "null";
+                        string TitleTo = "null";
+
+
+
+                        foreach (var account in @ViewBag.Accounts)
+                        {
+                            if (account.AccountId == item.AccountFromId)
+                                TitleFrom = account.Title;
+                            if (account.AccountId == item.AccountToId)
+                                TitleTo = account.Title;
+                        }
+
+
+
+
+
+                        <tr>
+                            <td>@TitleFrom</td>
+                            <td>@TitleTo</td>
+                            <td>@item.Sum</td>
+                            <td>@item.Description</td>
+                            <td>@item.Date</td>
+                        </tr>
+                    }
+                }
+
+
+                @* <tr>
+                    <td>Account1</td>
+                    <td>Account1</td>
+                    <td>Description</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td>Account1Account1Account1Account1Account1Account1</td>
+                    <td>Account1Account1Account1</td>
+                    <td>DescriptionAccount1Account1Account1</td>
+                    <td>23Account1Account1</td>
+                </tr> *@
+
+                <!-- More rows... -->
+            </tbody>
+        </table>
+    </div>
+    <div class="button-row">
+        <button class="btn btn-primary afirst">
+            <a href="add_transactions.html">Add transaction</a>
+        </button>
+        <button class="btn btn-secondary">Save as Excel</button>
+    </div>
+</div>
+
+
+
+
+<style>
+    body {
+        padding-top: 56px; /* Space for fixed navbar */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    .button-row {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .fixed-width {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+        .fixed-width th, .fixed-width td {
+            width: 41%;
+            word-wrap: break-word;
+        }
+
+            .fixed-width th:last-child {
+                width: 18%;
+            }
+
+    .btn-primary:hover {
+        border: 1px solid;
+        color: #007bff;
+        background-color: white;
+    }
+
+    a, a:hover {
+        text-decoration: none;
+    }
+
+    .afirst a {
+        color: white;
+    }
+
+    .afirst:hover a {
+        color: #007bff;
+    }
+</style>
+
+
+
+@* @if (User.Identity.IsAuthenticated)
 {
     <div>
         <h1>NAME:     @User.Identity.Name!!!!!!!!!!!!!</h1>
@@ -36,4 +174,4 @@ else
     Is Authenticated: @User.Identity.IsAuthenticated
     <br></br>
     Name: @User.Identity.Name
-</div>
+</div> *@
