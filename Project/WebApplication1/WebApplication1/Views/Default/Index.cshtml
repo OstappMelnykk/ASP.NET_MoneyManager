@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="Home" asp-action="index">HomePage</a></h3>
+<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a asp-controller="Administrator" asp-action="AdministratorMainPage">AdministratorMainPage</a></h3>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@User.Identity.Name</p>
+
+    <form method="post" asp-controller="Account" asp-action="Logout">
+        <input type="submit" value="log out" />
+    </form>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login">Log in</a>
+    <a asp-controller="Account" asp-action="Register">Register</a>
+}
+
+<p>
+    IsAuthenticated : @User.Identity.IsAuthenticated
+</p>
+
+<p>
+    Name : @User.Identity.Name
+</p>
