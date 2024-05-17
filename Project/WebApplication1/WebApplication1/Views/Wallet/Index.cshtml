@@ -29,16 +29,6 @@
                             }
                             <a asp-action="ChooseWallet" asp-controller="Wallet" asp-route-AccountTitle="@item.Title" class="btn btn-primary btn-space">Choose</a>
                             <a asp-action="DeleteWallet" asp-controller="Wallet" asp-route-AccountTitle="@item.Title" class="btn btn-primary btn-space btn-danger">Delete</a>
-
-
-                            @* <form asp-action="ChooseWallet" asp-controller="Wallet" asp-antiforgery="true" class="form-group">
-                                <div>
-
-                                        <input type="submit" class="btn btn-primary btn-create" value="Save" />
-                                </div>
-                            </form> *@
-                            
-                            @* <a class="btn btn-danger">Delete</a> *@
                         </td>
                     </tr>
                 }

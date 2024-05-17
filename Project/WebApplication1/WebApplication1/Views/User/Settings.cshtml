@@ -1,0 +1,110 @@
+﻿<style>
+    body {
+        padding-top: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .edit-profile-wrapper {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%; /* Ensure full width */
+        max-width: 600px;
+        padding: 20px;
+    }
+
+    .profile-frame {
+        width: 200px;
+        height: 200px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-frame-placeholder {
+        font-size: 24px;
+        color: #000;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        font-size: 16px;
+        padding: 10px;
+        width: 490px;
+    }
+
+    .btn-primary:hover, .btn-danger:hover {
+        border: 1px solid;
+        background-color: white;
+    }
+
+    .btn-primary:hover {
+        color: #007bff;
+    }
+
+    .btn-danger:hover {
+        color: #dc3545;
+    }
+
+    .button-group {
+        margin-top: 20px;
+    }
+
+        .button-group .btn {
+            width: 150px;
+            margin: 5px;
+        }
+
+    input {
+        width: 490px;
+        height: 40px;
+    }
+
+    .btnsave {
+        width: 150px;
+    }
+</style>
+
+
+
+
+<div class="edit-profile-wrapper">
+    <h2>Edit Profile</h2>
+
+    <div class="profile-frame">
+        <div class="profile-frame-placeholder">Frame</div>
+    </div>
+    <button class="btn btn-primary mb-4">Change Photo</button>
+    <form>
+        <div class="form-group">
+            <label for="editName">Name:</label>
+            <input type="text" class="form-control" id="editName" placeholder="Enter new name">
+        </div>
+        <div class="form-group">
+            <label for="editPhoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="editPhoneNumber" placeholder="Enter new phone number">
+        </div>
+        <div class="form-group">
+            <label for="editEmail">Email:</label>
+            <input type="email" class="form-control" id="editEmail" placeholder="Enter new email">
+        </div>
+        <button class="btn btn-primary btnsave">Save</button>
+    </form>
+</div>

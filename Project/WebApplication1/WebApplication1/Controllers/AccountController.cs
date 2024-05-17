@@ -92,7 +92,7 @@ namespace WebApplication1.Controllers
 
                     user.CurrentAccount = account1;
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Default");
                 }
                 else
                 {
@@ -127,7 +127,7 @@ namespace WebApplication1.Controllers
                         if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                             return Redirect(model.ReturnUrl);
                         else
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Default");
                     }
                 }
 
@@ -139,11 +139,11 @@ namespace WebApplication1.Controllers
 
 
 
-
+       
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return Redirect("/Home/Index");
+            return Redirect("/Default/Index");
         }
     }
 }

@@ -31,10 +31,6 @@
                                 TitleTo = account.Title;
                         }
 
-
-
-
-
                         <tr>
                             <td>@TitleFrom</td>
                             <td>@TitleTo</td>
@@ -45,29 +41,15 @@
                     }
                 }
 
-
-                @* <tr>
-                    <td>Account1</td>
-                    <td>Account1</td>
-                    <td>Description</td>
-                    <td>23</td>
-                </tr>
-                <tr>
-                    <td>Account1Account1Account1Account1Account1Account1</td>
-                    <td>Account1Account1Account1</td>
-                    <td>DescriptionAccount1Account1Account1</td>
-                    <td>23Account1Account1</td>
-                </tr> *@
-
-                <!-- More rows... -->
+               
             </tbody>
         </table>
     </div>
     <div class="button-row">
         <button class="btn btn-primary afirst">
-            <a href="add_transactions.html">Add transaction</a>
+            <a asp-action="MakeTransaction" asp-controller="Transaction">Add transaction</a>
         </button>
-        <button class="btn btn-secondary">Save as Excel</button>
+        <a asp-action="SavaAsExcel" asp-controller="Transaction" class="btn btn-secondary">Save as Excel</a>
     </div>
 </div>
 

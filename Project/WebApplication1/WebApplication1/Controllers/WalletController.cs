@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
             {
                 return RedirectToAction("Index", "Wallet");
             }
-            foreach (var item in db.Accounts.Where(account => account.PersonId == user.Id))
+            foreach (var item in db.Accounts)
             {
                 if (item.Title == Title)
                 {
@@ -95,7 +95,7 @@ namespace WebApplication1.Controllers
             if (wantedAccount == null)
                 return RedirectToAction("Index", "Wallet");
 
-            // Delete referencing transactions
+            
             db.Transactions.RemoveRange(wantedAccount.TransactionsOnTheAccount);
             db.Transactions.RemoveRange(wantedAccount.TransactionsFromTheAccount);
 
@@ -124,7 +124,7 @@ namespace WebApplication1.Controllers
             }
             else if (user.CurrentAccountId == wantedAccount.AccountId)
             {
-                // Update user's current account if the deleted account was the current one
+                
                 user.CurrentAccount = await db.Accounts.FirstOrDefaultAsync(account => account.PersonId == user.Id);
                 await db.SaveChangesAsync();
             }
