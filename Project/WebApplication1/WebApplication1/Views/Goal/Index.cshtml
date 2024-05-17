@@ -1,4 +1,93 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿@using WebApplication1.services
+
+<div class="container content-wrapper">
+    <h2 class="mb-4">Goals</h2>
+    <div class="table-responsive">
+        <table class="table fixed-width">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                
+
+                @if (ViewBag.AccountGoals != null)
+                {
+                    foreach (var item in ViewBag.AccountGoals)
+                    {
+                        decimal balance = BalanceCounter.ClacBalance(item.AccountId, ViewBag.DbContext);
+                        double percentage = (double)(balance * 100) / (double)item.AmountToCollect;
+                        double roundedPercentage = Math.Round(percentage, 1);
+
+                        string percentageClass = roundedPercentage > 100 ? "high-percentage" : "low-percentage";
+
+                        <tr>
+                            <td>@item.Title</td>
+                            <td class="@percentageClass"><strong><h6>@roundedPercentage%</h6></strong></td>
+                            <td>
+                                <a asp-action="GoalDetails" asp-controller="Goal" asp-route-Id="@item.GoalId"  class="btn btn-primary btn-space">See more</a>
+                                <a asp-action="GoalDelete" asp-controller="Goal" asp-route-Id="@item.GoalId" class="btn btn-primary btn-space btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="create-goal-form">
+        <h2>Create new goal</h2>
+        <form asp-action="AddGoal" asp-controller="Goal" asp-antiforgery="true" method="post">
+            <div class="form-group">
+                <label for="Title">Goal Name:</label>
+                <input type="text" class="form-control" id="goalName" name="Title" placeholder="Enter goal name">
+            </div>
+
+            <div class="form-group">
+                <label for="AmountToCollect">Goal Amount:</label>
+                <input type="text" class="form-control" id="goalAmount" name="AmountToCollect" placeholder="Enter goal amount">
+            </div>
+
+            <div class="form-group">
+                <label for="Description">Description:</label>
+                <input type="text" class="form-control" id="goalDescription" name="Description" placeholder="Enter goal description">
+            </div>
+            
+            <div class="text-center">
+                <input class="btn btn-primary btn-create" type="submit" value="Create new Goal" />
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+
+<style>
+    .high-percentage {
+        color: green;
+    }
+
+    .low-percentage {
+        color: red;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+@* @if (User.Identity.IsAuthenticated)
 {
     <div>
         <h1>NAME:     @User.Identity.Name!!!!!!!!!!!!!</h1>
@@ -36,4 +125,4 @@ else
     Is Authenticated: @User.Identity.IsAuthenticated
     <br></br>
     Name: @User.Identity.Name
-</div>
+</div> *@

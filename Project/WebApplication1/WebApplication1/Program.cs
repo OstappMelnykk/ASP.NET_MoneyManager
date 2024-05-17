@@ -35,7 +35,7 @@ namespace WebApplication1
             builder.Services.ConfigureApplicationCookie(config =>
             {
                 config.LoginPath = "/Account/Login";
-                config.AccessDeniedPath = "/Home/AccessDenied";
+                config.AccessDeniedPath = "/Default/AccessDenied";
             });
 
             builder.Services.AddAuthorization(options => {
@@ -55,7 +55,7 @@ namespace WebApplication1
 
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Default/Error");
                 app.UseHsts();
             }
 
@@ -70,7 +70,7 @@ namespace WebApplication1
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Default}/{action=Index}/{id?}");
 
             app.Run();
         }

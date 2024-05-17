@@ -1,0 +1,142 @@
+﻿<div class="container centered-container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title text-center">Add Transaction</h2>
+            <div class="text-center">
+                <button class="btn btn-outline-primary btn-block" onclick="showForm('to')">Transfer to account</button>
+                <button class="btn btn-outline-primary btn-block mt-2" onclick="showForm('from')">Transfer from account</button>
+                <button class="btn btn-outline-primary btn-block mt-2" onclick="showForm('between')">Transfer between accounts</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="formTo" class="transaction-form card mt-4">
+        <div class="card-body">
+            <h2 class="card-title text-center">Transfer to account</h2>
+
+            <form asp-action="AddTransaction_From_SomeWhere" asp-controller="Transaction" asp-antiforgery="true" method="post">
+                <div class="form-group">
+                    <label for="ToTitle">To:</label>
+                    <input type="text" class="form-control" id="accountTo" name="ToTitle" placeholder="Enter account to">
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <input type="text" class="form-control" id="descriptionTo" name="Description" placeholder="Enter description">
+                </div>
+                <div class="form-group">
+                    <label for="Sum">Sum:</label>
+                    <input type="text" class="form-control" id="amountTo" name="Sum" placeholder="Enter amount">
+                </div>
+
+                <div class="form-group btn btn-primary btn-block">
+                    <input class="btn btn-primary btn-block" type="submit" value="Add Transaction" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="formFrom" class="transaction-form card mt-4">
+        <div class="card-body">
+            <h2 class="card-title text-center">Transfer from account</h2>
+
+            <form asp-action="AddTransaction_To_SomeWhere" asp-controller="Transaction" asp-antiforgery="true" method="post">
+                <div class="form-group">
+                    <label for="FromTitle">From:</label>
+                    <input type="text" class="form-control" id="accountFrom" name="FromTitle" placeholder="Enter account from">
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <input type="text" class="form-control" id="descriptionFrom" name="Description" placeholder="Enter description">
+                </div>
+                <div class="form-group">
+                    <label for="Sum">Sum:</label>
+                    <input type="text" class="form-control" id="amountFrom" name="Sum" placeholder="Enter amount">
+                </div>
+
+                <div class="form-group btn btn-primary btn-block">
+                    <input class="btn btn-primary btn-block" type="submit" value="Add Transaction" />
+                </div>
+            </form>
+
+
+            
+        </div>
+    </div>
+
+
+    <div id="formBetween" class="transaction-form card mt-4">
+        <div class="card-body">
+            <h2 class="card-title text-center">Transfer between accounts</h2>
+
+            <form asp-action="AddTransaction_Between_Accounts" asp-controller="Transaction" asp-antiforgery="true" method="post">
+                <div class="form-group">
+                    <label for="FromTitle">From:</label>
+                    <input type="text" class="form-control" id="accountFromBetween" name="FromTitle" placeholder="Enter account from">
+                </div>
+                <div class="form-group">
+                    <label for="ToTitle">To:</label>
+                    <input type="text" class="form-control" id="accountToBetween" name="ToTitle" placeholder="Enter account to">
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description:</label>
+                    <input type="text" class="form-control" id="descriptionBetween" name="Description" placeholder="Enter description">
+                </div>
+                <div class="form-group">
+                    <label for="Sum">Sum:</label>
+                    <input type="text" class="form-control" id="amountBetween" name="Sum" placeholder="Enter amount">
+                </div>
+
+                <div class="form-group btn btn-primary btn-block">
+                    <input class="btn btn-primary btn-block" type="submit" value="Add Transaction" />
+                </div>
+            </form>     
+        </div>
+    </div>
+</div>
+
+<script>
+    function showForm(type) {
+        document.getElementById('formTo').style.display = 'none';
+        document.getElementById('formFrom').style.display = 'none';
+        document.getElementById('formBetween').style.display = 'none';
+
+        if (type === 'to') {
+            document.getElementById('formTo').style.display = 'block';
+        } else if (type === 'from') {
+            document.getElementById('formFrom').style.display = 'block';
+        } else if (type === 'between') {
+            document.getElementById('formBetween').style.display = 'block';
+        }
+    }
+</script>
+
+
+
+
+
+<style>
+    body {
+        padding-top: 60px;
+    }
+
+    #transactionForm {
+        display: none;
+    }
+
+    .btn-primary:hover {
+        border: 1px solid;
+        color: #007bff;
+        background-color: white;
+    }
+
+
+    .transaction-form {
+        display: none;
+    }
+    .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>

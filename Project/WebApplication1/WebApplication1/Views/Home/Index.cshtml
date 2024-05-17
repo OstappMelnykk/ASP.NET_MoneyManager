@@ -1,102 +1,165 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿@if (ViewBag.HasAccount)
 {
-    <div>
-        <h1>NAME:     @User.Identity.Name!!!!!!!!!!!!!</h1>
-        <form method="post" asp-controller="Account" asp-action="Logout">
-            <section>
-                <nav>
-                    <ul class="menuItems">
-                        <li>
-                            <button type="submit">Log Out</button>
-                        </li>
-                    </ul>
-                </nav>
-            </section>
-        </form>
+    <div class="container mt-4">
+        <div class="account-info">
+            <div>
+                @*             <p><h4>Account name:</h4><strong> <h3>@ViewBag.AccountName</h3> </strong> </p>
+            <p><h4>Balance:</h4><strong> <h3>@ViewBag.AccountBalance $</h3> </strong> </p>
+            *@
+                <p><strong>Account name: </strong>@ViewBag.AccountName</p>
+                <p><strong>Balance: </strong>@ViewBag.AccountBalance $</p>
+            </div>
+            <div class="account-settings">
+                <button class="btn btn-outline-secondary">Account settings</button>
+            </div>
+        </div>
+        <div>
+            <p><strong>Last transactions</strong></p>
+        </div>
+        <div class="transaction-table">
+            <table class="table fixed-width">
+                <thead>
+                    <tr>
+                        <td>From</td>
+                        <td>To</td>
+                        <td>Sum</td>
+                        <td>Description</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.LastTransactions != null)
+                    {
+                        @foreach (var item in ViewBag.LastTransactions)
+                        {
+                            string TitleFrom = "null";
+                            string TitleTo = "null";
+
+
+
+                            foreach (var account in @ViewBag.Accounts)
+                            {
+                                if (account.AccountId == item.AccountFromId)
+                                    TitleFrom = account.Title;
+                                if (account.AccountId == item.AccountToId)
+                                    TitleTo = account.Title;
+                            }
+
+
+
+
+
+                            <tr>
+                                <td>@TitleFrom</td>
+                                <td>@TitleTo</td>
+                                <td>@item.Sum</td>
+                                <td>@item.Description</td>
+                                <td>@item.Date</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="actions">
+            @* <div class="btn btn-outline-primary afirst">
+        <a asp-action="index" asp-controller="Transaction">See more</a>
+        </div> *@
+            @* <div class="btn btn-primary asecond">
+        <a asp-action="index" asp-controller="Transaction">Add transaction</a>
+        </div> *@
+            <a asp-action="index" asp-controller="Transaction" class="btn btn-outline-primary afirst aclas">See more</a>
+            <a asp-action="MakeTransaction" asp-controller="Transaction" class="btn btn-primary asecond aclas">Add transaction</a>
+        </div>
     </div>
 }
-else
-{
-    <div class="text-center">
-        <section>
-            <nav>
-                <ul class="menuItems">
-                    <li><a asp-controller="Account" asp-action="Login" class="btn btn-success btn-custom">Log In</a></li>
-                    <li><a asp-controller="Account" asp-action="Register" class="btn btn-info btn-custom">Register</a></li>
-                </ul>
-            </nav>
-        </section>
-
-    </div>
-}
-
-
-
-<div>
-    Is Authenticated: @User.Identity.IsAuthenticated
-    <br></br>
-    Name: @User.Identity.Name
-</div>
-<br></br>
-
-<div class="data1">
-
-
-
-
-    <p>UserMainPage</p>
-    <p> Email : @ViewBag.Email </p>
-    <p> UserId : @ViewBag.UserId </p>
-    <p> Name : @ViewBag.Name </p>
-
-    <br />
-    <p> AccountName : @ViewBag.AccountName </p>
-    <p> Balance : @ViewBag.AccountBalance </p>
-</div>
-<br />
-<table>
-
-    <tr>
-        <th>Description</th>
-        <th>Sum</th>
-        <th>Date</th>
-    </tr>
-    @if (ViewBag.LastTransactions != null)
-    {
-        @foreach (var item in ViewBag.LastTransactions)
-        {
-            <tr>
-                <th>@item.Description</th>
-                <th>@item.Sum</th>
-                <th>@item.Date</th>
-            </tr>
-        }
-    }
-
-
-
-</table>
-<br></br>
-<a asp-action="index" asp-controller="Transaction">SEE MORE</a>
-
-
-<br></br>
-<br></br>
-<a asp-action="index" asp-controller="Transaction">Add transaction</a>
-
-
 
 
 
 
 <style>
-    table, th, td {
-        margin 5px;
-        border: 1px solid;
+    .aclas{
+        display: block;
+        margin-bottom: 10px;
+    }
+    body {
+        background-color: #f7f7f7;
+        padding-top: 60px;
     }
 
-    table {
+    .account-info, .account-settings, .transaction-table, .actions {
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        background-color: #fff;
+    }
+
+    .account-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .account-settings {
+        text-align: right;
+    }
+
+    .actions div {
         width: 100%;
-        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        color: white;
+        background-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            color: #007bff;
+            border: #007bff 1px solid;
+            background-color: white;
+        }
+
+    .fixed-width {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+        .fixed-width th, .fixed-width td {
+            width: 41%;
+            word-wrap: break-word;
+        }
+
+            .fixed-width th:last-child {
+                width: 18%;
+            }
+
+    .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+    .afirst:hover a {
+        color: white;
+    }
+
+    .asecond:hover a {
+        color: #007bff;
+    }
+
+    .asecond a {
+        color: white;
+    }
+
+    .afirst a {
+        color: #007bff;
     }
 </style>

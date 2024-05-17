@@ -1,4 +1,165 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿@using WebApplication1.services
+@model Account
+
+
+
+
+
+<div class="container content-wrapper">
+    <h2 class="mb-4">Accounts</h2>
+    <div class="table-responsive">
+        <table class="table fixed-width">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.Accounts)
+                {                 
+                    <tr>
+                        <td>@item.Title</td>
+                        <td>@BalanceCounter.ClacBalance(item.AccountId, ViewBag.DbContext)</td>
+                        <td>
+                            @{
+                                int account_id = (int)item.AccountId;
+                                Console.WriteLine(account_id);
+                            }
+                            <a asp-action="ChooseWallet" asp-controller="Wallet" asp-route-AccountTitle="@item.Title" class="btn btn-primary btn-space">Choose</a>
+                            <a asp-action="DeleteWallet" asp-controller="Wallet" asp-route-AccountTitle="@item.Title" class="btn btn-primary btn-space btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="create-account-form">
+        <h2>Create new account</h2>
+        <div class="text-center">
+            <form asp-action="AddWallet" asp-controller="Wallet" asp-antiforgery="true" class="form-group">
+                <div>
+                    <p>
+                        <label asp-for="Title">Account Name:</label>
+                        <input type="text" asp-for="Title" class="form-control" id="accountName" placeholder="Enter account name" />
+                    </p>
+                    
+                    <p>
+                        <input type="submit" class="btn btn-primary btn-create" value="Save" />
+                    </p>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+@* 
+<script>
+    function showCreateAccountForm() {
+        document.querySelector('.create-account-form').style.display = 'block';
+        document.querySelector('.btn-create').style.display = 'none';
+    }
+</script> *@
+
+
+
+<style>
+    body {
+        padding-top: 56px; /* Space for fixed navbar */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar {
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-wrapper {
+        padding: 20px;
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    .button-row {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .fixed-width {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+        .fixed-width th, .fixed-width td {
+            width: 40%;
+            word-wrap: break-word;
+        }
+
+            .fixed-width th:last-child {
+                width: 20%;
+            }
+
+    .btn {
+        width: 80px;
+    }
+
+    .btn-create {
+        width: 170px;
+    }
+
+    .btn-primary:hover {
+        border: 1px solid;
+        color: #007bff;
+        background-color: white;
+    }
+
+    .btn-danger:hover {
+        color: #dc3545;
+        background-color: white;
+        border: #dc3545 1px solid;
+    }
+
+    .text-center {
+        margin-top: 30px;
+    }
+
+    .text-center {
+        margin-top: 30px;
+    }
+
+    .create-account-form {
+        display: none;
+        margin-top: 20px;
+    }
+
+    .create-account-form {
+        display: block;
+    }
+    /*.btn-create {
+
+                display: none;
+            }*/
+</style>
+
+
+
+
+
+
+
+@* @if (User.Identity.IsAuthenticated)
 {
     <div>
         <h1>NAME:     @User.Identity.Name!!!!!!!!!!!!!</h1>
@@ -48,4 +209,4 @@ else
 }
 <br></br>
 
-<a asp-action="index" asp-controller="Wallet"><h1>CREATE NEW ACCOUNT</h1></a>
+<a asp-action="index" asp-controller="Wallet"><h1>CREATE NEW ACCOUNT</h1></a> *@
