@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
     
                 Account account1 = new Account()
                 {
-                    Title = "account1",
+                    Title = "DefaultAccount",
                     Person = user,
                     Goals = new List<Goal>(),
                     TransactionsOnTheAccount = new List<Transaction>(),
@@ -139,7 +139,55 @@ namespace WebApplication1.Controllers
 
 
 
-       
+
+
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    
+                    return RedirectToAction("Login", "Account");
+                }
+                
+                var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return View();
+                }
+                
+                await _signInManager.RefreshSignInAsync(user);
+                
+                return RedirectToAction("ChangePasswordConfirmation", "Account");
+            }
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult ChangePasswordConfirmation()
+        {
+            return View();
+        }
+
+
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

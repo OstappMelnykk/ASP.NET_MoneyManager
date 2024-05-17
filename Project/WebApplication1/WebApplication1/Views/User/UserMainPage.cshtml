@@ -1,23 +1,21 @@
 ﻿
 <div class="profile-wrapper">
-    <h2>My Profile</h2>
     <div class="profile-frame">
         <div class="profile-frame-placeholder">Frame</div>
     </div>
-    <h3 id="username">John Doe</h3>
+    <h3 id="username">@ViewBag.userName</h3>
+    <br />
     <form>
 
         <div class="form-group">
             <label for="phoneNumber">Phone Number:</label>
-            <input type="text" class="form-control" id="phoneNumber" value="+1234567890" readonly>
+            <input type="text" class="form-control" id="phoneNumber" value="@ViewBag.phoneNumber" readonly>
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="text" class="form-control" id="email" value="john.doe@example.com" readonly>
+            <input type="text" class="form-control" id="email" value="@ViewBag.email" readonly>
         </div>
-
-
 
 
         <div class="button-group">
@@ -25,7 +23,7 @@
                 <a asp-action="Settings" asp-controller="User">Edit Profile</a>
             </button>
             <button class="btn btn-primary">
-                <a asp-action="Security" asp-controller="User">Security Settings</a>
+                <a asp-action="ChangePassword" asp-controller="Account">Security Settings</a>
             </button>
             <a asp-action="Logout" asp-controller="Account" class="btn btn-danger">Log Out</a>
         </div>

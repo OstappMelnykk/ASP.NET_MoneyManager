@@ -31,13 +31,10 @@
                             <td>
                                 <a asp-action="GoalDetails" asp-controller="Goal" asp-route-Id="@item.GoalId"  class="btn btn-primary btn-space">See more</a>
                                 <a asp-action="GoalDelete" asp-controller="Goal" asp-route-Id="@item.GoalId" class="btn btn-primary btn-space btn-danger">Delete</a>
-                                @* <button class="btn btn-danger">Delete</button> *@
                             </td>
                         </tr>
                     }
                 }
-
-
             </tbody>
         </table>
     </div>

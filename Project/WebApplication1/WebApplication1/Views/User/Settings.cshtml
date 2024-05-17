@@ -1,4 +1,54 @@
-﻿<style>
+﻿<div class="edit-profile-wrapper">
+    <h2>Edit Profile</h2>
+
+    <div class="profile-frame">
+        <div class="profile-frame-placeholder">Frame</div>
+    </div>
+    <button class="btn btn-primary mb-4">Change Photo</button>
+
+    <form asp-action="Settings" asp-controller="User" asp-antiforgery="true" method="post">
+        <div class="form-group">
+            <label for="editName">Name:</label>
+            <input type="text" class="form-control" id="editName" name="UserName" placeholder="Enter new name">
+        </div>
+        <div class="form-group">
+            <label for="editPhoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="editPhoneNumber" name="PhoneNumber" placeholder="Enter new phone number">
+        </div>
+        <div class="form-group">
+            <label for="editEmail">Email:</label>
+            <input type="email" class="form-control" id="editEmail" name="Email" placeholder="Enter new email">
+        </div>
+        <input class="btn btn-primary btnsave" type="submit" value="Save" />
+    </form>
+
+
+
+    @* <form asp-action="AddGoal" asp-controller="Goal" asp-antiforgery="true" method="post">
+        <div class="form-group">
+            <label for="Title">Goal Name:</label>
+            <input type="text" class="form-control" id="goalName" name="Title" placeholder="Enter goal name">
+        </div>
+
+        <div class="form-group">
+            <label for="AmountToCollect">Goal Amount:</label>
+            <input type="text" class="form-control" id="goalAmount" name="AmountToCollect" placeholder="Enter goal amount">
+        </div>
+
+        <div class="form-group">
+            <label for="Description">Description:</label>
+            <input type="text" class="form-control" id="goalDescription" name="Description" placeholder="Enter goal description">
+        </div>
+
+        <div class="text-center">
+            <input class="btn btn-primary btn-create" type="submit" value="Create new Goal" />
+        </div>
+    </form> *@
+</div>
+
+
+
+<style>
     body {
         padding-top: 60px;
         display: flex;
@@ -19,7 +69,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%; /* Ensure full width */
+        width: 100%; 
         max-width: 600px;
         padding: 20px;
     }
@@ -85,26 +135,3 @@
 
 
 
-<div class="edit-profile-wrapper">
-    <h2>Edit Profile</h2>
-
-    <div class="profile-frame">
-        <div class="profile-frame-placeholder">Frame</div>
-    </div>
-    <button class="btn btn-primary mb-4">Change Photo</button>
-    <form>
-        <div class="form-group">
-            <label for="editName">Name:</label>
-            <input type="text" class="form-control" id="editName" placeholder="Enter new name">
-        </div>
-        <div class="form-group">
-            <label for="editPhoneNumber">Phone Number:</label>
-            <input type="text" class="form-control" id="editPhoneNumber" placeholder="Enter new phone number">
-        </div>
-        <div class="form-group">
-            <label for="editEmail">Email:</label>
-            <input type="email" class="form-control" id="editEmail" placeholder="Enter new email">
-        </div>
-        <button class="btn btn-primary btnsave">Save</button>
-    </form>
-</div>
