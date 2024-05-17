@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+        .btn-primary:hover {
+            border: 1px solid;
+            color: #007bff;
+            background-color: white;
+        }
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            text-align: center;
+        }
+        .canvas-container {
+            margin: 20px 0;
+        }
+        canvas{
+            border: black 2px solid;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Moneymanager</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accounts.html">Accounts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="goals.html">Goals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="statistic.html">Statistic</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my_profile.html">My profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container centered-container">
+        <h2 class="mt-4">Statistics</h2>
+        <div class="form-group mt-4">
+            <label for="chartType">Select Chart Type:</label>
+            <select class="form-control" id="chartType" style="width: 200px; display: inline-block;">
+                <option value="line">Linear Statistics</option>
+                <option value="bar">Bar Statistics</option>
+            </select>
+        </div>
+        <div class="canvas-container">
+            <canvas id="statisticsCanvas" width="600" height="400"></canvas>
+        </div>
+        <div class="form-inline justify-content-center mt-4">
+            <label for="startDate" class="mr-2">From:</label>
+            <input type="date" class="form-control mr-4" id="startDate">
+            <label for="endDate" class="mr-2">To:</label>
+            <input type="date" class="form-control mr-4" id="endDate">
+            <button class="btn btn-primary" onclick="applyDateRange()">Apply</button>
+        </div>
+    </div>
+
+    <script>
+        function applyDateRange() {
+            // Your code to fetch and display statistics based on the selected date range
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            console.log(`Fetching statistics from ${startDate} to ${endDate}`);
+            // Implement your logic to update the canvas with the fetched data
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
