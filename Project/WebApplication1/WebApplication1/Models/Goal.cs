@@ -18,6 +18,7 @@ namespace WebApplication1.Models
         public string Description { get; set; }
 
         [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "The field AmountToCollect must be greater than zero.")]
         public decimal AmountToCollect { get; set; }
 
         public int AccountId { get; set; }
