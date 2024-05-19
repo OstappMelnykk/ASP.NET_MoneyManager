@@ -13,14 +13,18 @@ namespace WebApplication1.Controllers
     {
         ApplicationDbContext db;
         private readonly UserManager<Person> _userManager;
-        public WalletController(ApplicationDbContext context, UserManager<Person> userManager)
+        private readonly ILogger<WalletController> _logger;
+        public WalletController(ApplicationDbContext context, UserManager<Person> userManager, ILogger<WalletController> logger)
         {
             db = context;
             _userManager = userManager;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+
+            _logger.LogInformation($"User {user.UserName} accessed the Index method of WalletController.");
 
             List<Account> accounts = db.Accounts.Where(account => account.PersonId == user.Id).ToList();
            
@@ -38,12 +42,14 @@ namespace WebApplication1.Controllers
 
             if (Title == "" || Title == null)
             {
+                _logger.LogWarning($"User {user.UserName} attempted to add a wallet with an empty title.");
                 return RedirectToAction("Index", "Wallet");
             }
             foreach (var item in db.Accounts)
             {
                 if (item.Title == Title)
                 {
+                    _logger.LogWarning($"User {user.UserName} attempted to add a wallet with a title that already exists: {Title}.");
                     return RedirectToAction("Index", "Wallet");
                 }
             }
@@ -62,6 +68,8 @@ namespace WebApplication1.Controllers
             db.Accounts.Add(account);
             await db.SaveChangesAsync();
 
+            _logger.LogInformation($"User {user.UserName} added a new wallet with title: {Title}.");
+
             return RedirectToAction("Index", "Wallet");
         }
 
@@ -69,6 +77,7 @@ namespace WebApplication1.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
+            _logger.LogInformation($"User {user.UserName} chose the wallet with title: {AccountTitle}.");
 
             user.CurrentAccount = db.Accounts.Where(account => account.PersonId == user.Id)
                 .Where(account => account.Title == AccountTitle)
@@ -87,13 +96,19 @@ namespace WebApplication1.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
+            _logger.LogInformation($"User {user.UserName} requested to delete the wallet with title: {AccountTitle}.");
+
             var wantedAccount = db.Accounts
                 .Include(a => a.TransactionsOnTheAccount)
                 .Include(a => a.TransactionsFromTheAccount)
                 .SingleOrDefault(account => account.PersonId == user.Id && account.Title == AccountTitle);
 
             if (wantedAccount == null)
+            {
+                _logger.LogWarning($"User {user.UserName} attempted to delete a non-existing wallet with title: {AccountTitle}.");
                 return RedirectToAction("Index", "Wallet");
+            }
+                
 
             
             db.Transactions.RemoveRange(wantedAccount.TransactionsOnTheAccount);
@@ -102,7 +117,8 @@ namespace WebApplication1.Controllers
             db.Accounts.Remove(wantedAccount);
             await db.SaveChangesAsync();
 
-            
+            _logger.LogInformation($"User {user.UserName} deleted the wallet with title: {AccountTitle}.");
+
             var remainingAccountsCount = await db.Accounts.CountAsync(account => account.PersonId == user.Id);
             if (user.CurrentAccountId == wantedAccount.AccountId && remainingAccountsCount == 0)
             {

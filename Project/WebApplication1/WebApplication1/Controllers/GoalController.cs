@@ -13,14 +13,20 @@ namespace WebApplication1.Controllers
     {
         ApplicationDbContext db;
         private readonly UserManager<Person> _userManager;
-        public GoalController(ApplicationDbContext context, UserManager<Person> userManager)
+       
+        private readonly ILogger<GoalController> _logger;
+
+        public GoalController(ApplicationDbContext context, UserManager<Person> userManager, ILogger<GoalController> logger)
         {
             db = context;
             _userManager = userManager;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+
+            _logger.LogInformation($"User {user.UserName} accessed the Index method of GoalController.");
 
             List<Goal> AccountGoals = db.Goals.Where(goal => goal.AccountId == user.CurrentAccountId).ToList();
 
@@ -36,8 +42,11 @@ namespace WebApplication1.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
+            _logger.LogInformation($"User {user.UserName} is adding a new goal.");
+
             if (AmountToCollect <= 0)
             {
+                _logger.LogWarning($"User {user.UserName} attempted to add a goal with invalid amount.");
                 return RedirectToAction("Index", "Goal");
             }
 
@@ -65,6 +74,7 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> GoalDetails()
         {
+            _logger.LogInformation("Goal details method accessed.");
             return View();
         }
         
@@ -73,11 +83,15 @@ namespace WebApplication1.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
+            _logger.LogInformation($"User {user.UserName} is attempting to delete goal with ID: {Id}.");
+
             var wantedGoal = db.Goals.Where(goal => goal.GoalId == Id).FirstOrDefault();
                 
 
             if (wantedGoal == null)
-                return RedirectToAction("Index", "Goal");
+
+                _logger.LogWarning($"User {user.UserName} attempted to delete a non-existing goal.");
+            return RedirectToAction("Index", "Goal");
 
 
             

@@ -11,10 +11,14 @@ namespace WebApplication1.Controllers
     {
         ApplicationDbContext db;
         private readonly UserManager<Person> _userManager;
-        public HomeController(ApplicationDbContext context, UserManager<Person> userManager)
+        private readonly ILogger<HomeController> _logger;
+
+
+        public HomeController(ApplicationDbContext context, UserManager<Person> userManager, ILogger<HomeController> logger)
         {
             db = context;
             _userManager = userManager;
+            _logger = logger;
         }
 
 
@@ -23,6 +27,8 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+
+            _logger.LogInformation($"User {user.UserName} accessed the Index method of HomeController.");
 
             bool HasAccount = user.CurrentAccountId != null && db.Accounts.Where(account => account.AccountId == user.CurrentAccountId).Count() != 0;
             decimal Balance = 0m;

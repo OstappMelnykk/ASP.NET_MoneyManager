@@ -15,16 +15,20 @@ namespace WebApplication1.Controllers
     {
         ApplicationDbContext db;
         private readonly UserManager<Person> _userManager;
-        public TransactionController(ApplicationDbContext context, UserManager<Person> userManager)
+        private readonly ILogger<TransactionController> _logger;
+
+        public TransactionController(ApplicationDbContext context, UserManager<Person> userManager, ILogger<TransactionController> logger)
         {
             db = context;
             _userManager = userManager;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
 
+            _logger.LogInformation($"User {user.UserName} accessed the Index method of TransactionController.");
 
             bool HasAccount = user.CurrentAccountId != null;
             decimal Balance = 0m;
@@ -59,6 +63,8 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> SavaAsExcel()
         {
             var user = await _userManager.GetUserAsync(User);
+
+            _logger.LogInformation($"User {user.UserName} requested to export transactions to Excel.");
 
             List<Transaction> AllTransactions = db.Transactions
                     .Where(
@@ -108,6 +114,10 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTransaction_From_SomeWhere(string ToTitle, string Description, decimal Sum)
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            _logger.LogInformation($"User {user.UserName} initiated transaction from somewhere.");
+
             var _AccountTo = db.Accounts.Where(account => account.Title == ToTitle).FirstOrDefault();
 
             if (_AccountTo != null)
@@ -136,6 +146,9 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> AddTransaction_To_SomeWhere(string FromTitle, string Description, decimal Sum)
         {
             var user = await _userManager.GetUserAsync(User);
+
+
+            _logger.LogInformation($"User {user.UserName} initiated transaction to somewhere.");
 
             var _AccountFrom = db.Accounts.Where(account => account.Title == FromTitle).FirstOrDefault();
 
@@ -179,6 +192,8 @@ namespace WebApplication1.Controllers
 
 
             var user = await _userManager.GetUserAsync(User);
+
+            _logger.LogInformation($"User {user.UserName} initiated transaction between accounts.");
 
             var _AccountFrom = db.Accounts.Where(account => account.Title == FromTitle).FirstOrDefault();
             var _AccountTo = db.Accounts.Where(account => account.Title == ToTitle).FirstOrDefault();

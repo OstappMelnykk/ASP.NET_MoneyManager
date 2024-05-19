@@ -48,7 +48,7 @@ namespace WebApplication1.Tests
             _userManager = mockUserManager.Object;
 
 
-            _controller = new GoalController(_context, _userManager);
+            _controller = new GoalController(_context, _userManager, null);
         }
      
 

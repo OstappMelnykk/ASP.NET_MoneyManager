@@ -54,7 +54,7 @@ namespace WebApplication1.Tests
             _userManager = mockUserManager.Object;
 
 
-            _controller = new TransactionController(_context, _userManager);
+            _controller = new TransactionController(_context, _userManager, null);
 
 
             _context.Users.Add(new Person { Email = "dasda@casda", UserName = "dsada", Id = "1", PhoneNumber = "33333333" });

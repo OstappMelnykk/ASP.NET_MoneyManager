@@ -40,7 +40,7 @@ namespace WebApplication1.Tests
                 .Options;
             _dbContext = new ApplicationDbContext(options);
 
-            _controller = new AccountController(_dbContext, _userManagerMock.Object, _signInManagerMock.Object);
+            _controller = new AccountController(_dbContext, _userManagerMock.Object, _signInManagerMock.Object, null);
         }
 
         [TestMethod]

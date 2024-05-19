@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Security.Claims;
 using WebApplication1.Models;
 
@@ -10,6 +11,15 @@ namespace WebApplication1
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+
+
+            var path = Directory.GetCurrentDirectory();
+            builder.Services.AddSingleton<ILoggerFactory>(new LoggerFactory().AddFile($"{path}\\Logs\\Log.log"));
+
+
+
+
 
 
             string connection = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -66,6 +76,11 @@ namespace WebApplication1
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+
+         /*   
+*/
+
 
 
             app.MapControllerRoute(
